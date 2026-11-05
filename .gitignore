@@ -1,0 +1,14 @@
+# Build output
+/husk
+/src/*.o
+/build/
+
+# Local notes, not part of the repo
+/_private-notes/
+
+__pycache__/
+.DS_Store
+
+# Markdown notes, except the README
+*.md
+!README.md
