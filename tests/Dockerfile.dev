@@ -1,0 +1,22 @@
+# Privileged Debian test environment for husk.
+#
+# Build:
+#   docker build -f tests/Dockerfile.dev -t husk-dev .
+# Run (Linux kernel execution is required; Docker Desktop works):
+#   docker run --rm --privileged -v "$PWD":/work -w /work husk-dev make check
+FROM debian:bookworm-slim
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        build-essential \
+        clang \
+        make \
+        busybox-static \
+        procps \
+        util-linux \
+        iproute2 \
+        cppcheck \
+        ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /work
