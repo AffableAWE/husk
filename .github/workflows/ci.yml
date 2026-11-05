@@ -1,0 +1,33 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-and-smoke:
+    name: ${{ matrix.cc }} build + privileged smoke + cppcheck
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        cc: [gcc, clang]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install test dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential clang busybox-static procps util-linux cppcheck
+      - name: Strict build and rootfs
+        run: |
+          make clean
+          make CC=${{ matrix.cc }} WERROR=1
+          make rootfs
+      - name: Privileged Stage 1 smoke
+        run: sudo make check CC=${{ matrix.cc }}
+      - name: cppcheck
+        run: |
+          cppcheck --enable=warning,performance,portability \
+            --error-exitcode=1 --std=c17 -Isrc src/*.c
