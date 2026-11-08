@@ -69,6 +69,4 @@ are described in the [runtime reference](docs/runtime.md#tests-and-performance).
 
 ## Understand the project
 
-- [Architecture and every file](docs/architecture.md)
-- [Concepts, study order, and practical exercises](docs/learning-guide.md)
-- [Interview questions, answer outlines, and design gaps](docs/interview-guide.md)
+
