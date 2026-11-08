@@ -67,6 +67,5 @@ CI builds with GCC and Clang, runs the privileged smoke suite, and checks the
 source with cppcheck. Additional resource, networking, and lifecycle suites
 are described in the [runtime reference](docs/runtime.md#tests-and-performance).
 
-## Understand the project
 
 
